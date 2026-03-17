@@ -6,3 +6,6 @@ Analyze my codebase. Start with the backend Python files — read all route file
 
 
 Okay your understanding looks correct. Now proceed to Stage 2 — ask me your questions about the domain and business logic before designing the schema.
+
+
+The schema looks good, I approve it. But do NOT generate Oracle DDL or touch anything Oracle related. Instead generate the Mermaid ER diagram first, then we implement on local PostgreSQL only using the connection string I'll provide.
