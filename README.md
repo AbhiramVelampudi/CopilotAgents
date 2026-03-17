@@ -15,3 +15,7 @@ Great. Now proceed with setting up SQLAlchemy 2.0 + Alembic on top of this — g
 
 
 Go in order starting from #1. Pause after each file swap and show me what changed before moving to the next.
+
+
+
+Great work. Now handle the remaining files outside migration scope — runner.py, ban_stats.py, analytics.py and any others still importing db_connection. Same process, replace all Oracle code with SQLAlchemy. Then we'll do a final verification that zero Oracle imports remain in the entire codebase.
