@@ -19,3 +19,15 @@ Go in order starting from #1. Pause after each file swap and show me what change
 
 
 Great work. Now handle the remaining files outside migration scope — runner.py, ban_stats.py, analytics.py and any others still importing db_connection. Same process, replace all Oracle code with SQLAlchemy. Then we'll do a final verification that zero Oracle imports remain in the entire codebase.
+
+
+
+We were in the middle of migrating the remaining Oracle files to SQLAlchemy. The following files are still pending:
+
+- activity_tracker.py (was mid-migration, lines 150-360 not yet read)
+- infra_activity.py
+- dbagent_sync.py
+- sync_adba_data.py
+- query.py
+
+activities_stats.py is already done. Please read the greenfield-pg-schema.md memory file first to get context on our schema, then continue the migration from activity_tracker.py. Same rules — replace all Oracle/cx_Oracle/db_connection code with SQLAlchemy repository pattern, pause after each file.
