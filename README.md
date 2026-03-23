@@ -31,3 +31,39 @@ We were in the middle of migrating the remaining Oracle files to SQLAlchemy. The
 - query.py
 
 activities_stats.py is already done. Please read the greenfield-pg-schema.md memory file first to get context on our schema, then continue the migration from activity_tracker.py. Same rules — replace all Oracle/cx_Oracle/db_connection code with SQLAlchemy repository pattern, pause after each file.
+
+
+
+from playwright.sync_api import sync_playwright
+
+def test_yubikey_login():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=False) # Keep False to see it work!
+        context = browser.new_context()
+        page = context.new_page()
+
+        # 1. Create a CDP Session
+        client = context.new_cdp_session(page)
+
+        # 2. Enable WebAuthn and add a virtual device
+        client.send("WebAuthn.enable")
+        client.send("WebAuthn.addVirtualAuthenticator", {
+            "options": {
+                "protocol": "ctap2",      # Standard for YubiKey/FIDO2
+                "transport": "usb",
+                "hasResidentKey": True,
+                "hasUserVerification": True,
+                "isUserVerified": True,   # This "clicks" the button for you
+                "automaticPresenceSimulation": True # Skips the manual touch requirement
+            }
+        })
+
+        # 3. Navigate to your Office 365 / Teams login
+        page.goto("https://login.microsoftonline.com")
+        
+        # Proceed with username/password... 
+        # When the "Touch your security key" screen appears, 
+        # the virtual authenticator will intercept it and signal success.
+
+        browser.close()
+        
