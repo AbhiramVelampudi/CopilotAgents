@@ -67,3 +67,12 @@ def test_yubikey_login():
 
         browser.close()
         
+
+Let's say I have a security key yubikey requirement for multiple sites
+
+Instead of storing session.json and reusing it 
+
+I don't want to store it, I want him to manually invoke local playwright browser and when he logs in , that session should be captured by the application website and be used in that (note: we should not store it anywhere it's security breach)
+
+
+Fyi application is hosted on azure
